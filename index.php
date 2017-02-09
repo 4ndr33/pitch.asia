@@ -86,7 +86,9 @@ else
 {
 
 //require get_template_directory()."/pages2/index.html";
+	echo("<pre>");
     wp_nav_menu();
+	echo("</pre>");
     get_sidebar();
     _e('Menu', 'profound');
 }
