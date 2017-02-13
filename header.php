@@ -40,7 +40,6 @@ if(isset($_GET['action']) && $_GET['action'] == 'del'){
     <div id="parent-wrapper" class="parent-wrapper grid-col-16">
         <div id="wrapper" class="wrapper grid-col-16">
             
-            <?php if(!profound_get_option('disable_header')): ?>
             <div class="header-bg-section clearfix">
                 <div id="header-section" class="header-section grid-col-16 clearfix">
                     <div id="logo-section" class="logo-section grid-col-7 grid-float-left clearfix"><?php profound_logo() ?></div>
@@ -76,13 +75,9 @@ echo wp_logout_url( get_bloginfo('url') );
                 </div><!-- header section ends -->
                 
             </div><!-- header bg section ends -->
-            <?php if (!profound_get_option('disable_menu')): ?>
             <div id="nav-section" class="nav-section grid-col-16 grid-float-left clearfix">
                 <div id="primarymenu-resp" class="primarymenu-resp"><span><?php _e('Menu', 'profound') ?></span><i class="mdf mdf-bars"></i></div>
                 <div id="primarymenu-section" class="primarymenu-section nav"><?php profound_nav() ?></div>
             </div>
-            <?php endif; ?>
-
-            <?php endif; ?>
                         
             <div id="main-section" class="main-section grid-col-16 clearfix">

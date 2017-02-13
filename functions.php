@@ -3,6 +3,81 @@
 
 //This function below will NOT reset the user's password when they are confirmed by the "New User Approve" plugin. If we remove this function, then the user will always get a reset new password when they are approved, and we do not want that to happen
 
+function profound_logo() {
+    
+    //$logo_img = profound_get_option('logo_img');
+            
+        if( empty($logo_img)): ?>
+        
+        <div id="site-title" class="site-title">
+                <a href="<?php echo esc_url( home_url( '/' ) ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ) . ' | ' . esc_attr( get_bloginfo('description') ) ?>" rel="home"><?php echo esc_html(get_bloginfo( 'name', 'display' )) ?></a>
+            </div>
+                <div id="site-description" class="site-description"><?php echo esc_html( get_bloginfo( 'description' ) ) ?></div>
+        <?php else: ?>
+        
+            <div id="site-title">
+                <a href="<?php echo esc_url( home_url( '/' ) ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ) ?>" rel="home"><img src="<?php echo esc_url( profound_get_option('logo_img') ) ?>"/></a>
+            </div>
+
+        <?php endif;
+}
+function profound_get_social_section_individual_icon($option, $title, $icon) {
+    $output = '';
+
+    if(get_option($option)){
+        $output .= '<div class="social-icons">';
+        $output .= '<a href="'.esc_url(get_option($option)).'" title="'.esc_attr($title).'" target="_blank"><i class="mdf mdf-'.esc_attr($icon).'"></i></a>';
+        $output .= '</div>';
+    }
+    return $output;
+    
+}
+function profound_social_section_show() {    
+    
+    if(!get_option('disable_social_section')):
+
+    $output = false;
+
+    $output .= profound_get_social_section_individual_icon('facebook', 'Facebook', 'facebook');
+    $output .= profound_get_social_section_individual_icon('twitter', 'Twitter', 'twitter');
+    $output .= profound_get_social_section_individual_icon('google-plus', 'Google+', 'google-plus');
+    $output .= profound_get_social_section_individual_icon('linkedin', 'Linkedin', 'linkedin');
+    $output .= profound_get_social_section_individual_icon('instagram', 'Instagram', 'instagram');
+    $output .= profound_get_social_section_individual_icon('pinterest', 'Pinterest', 'pinterest');
+    $output .= profound_get_social_section_individual_icon('skype', 'Skype', 'skype');
+    $output .= profound_get_social_section_individual_icon('tumblr', 'Tumblr', 'tumblr');
+    $output .= profound_get_social_section_individual_icon('rss', 'RSS feed', 'rss');
+    
+    if($output !== false): ?>
+    <div id="social-section" class="social-section">
+        <?php echo $output ?>
+    </div>
+    <?php endif ?>
+<?php
+    endif;
+}
+function profound_nav() {
+    wp_nav_menu(array(
+        'theme_location' => 'primary',
+        'container_id' => 'menu',
+        'menu_class' => 'sf-menu profound_menu',
+        'menu_id' => 'profound_menu',
+        'fallback_cb' => 'profound_nav_fallback' // Fallback function in case no menu item is defined.
+    ));
+}
+
+function profound_nav_fallback() {
+?>
+    <div id="menu">
+    	<ul class="sf-menu" id="profound_menu">
+			<?php
+            	wp_list_pages( 'title_li=&sort_column=menu_order&depth=3');
+            ?>
+        </ul>
+    </div>
+<?php
+}
+
 function ignore_new_user_autopass() {
 	return true;
 }
