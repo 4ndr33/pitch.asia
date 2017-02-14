@@ -227,11 +227,11 @@ while ( $loop->have_posts() ) : $loop->the_post(); ?>
 
 
 
-                         <?php wp_link_pages(array('before' => '<div class="post-nav-link"><span>' . __('Pages:', 'profound') . '</span>', 'after' => '</div>')) ?>
+                         <?php //wp_link_pages(array('before' => '<div class="post-nav-link"><span>' . __('Pages:', 'profound') . '</span>', 'after' => '</div>')) ?>
                     </div>
 
                     <div class="post-below-content">
-                         <?php edit_post_link( __( 'Edit', 'profound' ), '<div class="edit-link">', '</div>' ) ?>
+                         <?php //edit_post_link( __( 'Edit', 'profound' ), '<div class="edit-link">', '</div>' ) ?>
                     </div>
 
 
@@ -243,7 +243,7 @@ while ( $loop->have_posts() ) : $loop->the_post(); ?>
         
     </div><!-- inner-content-section ends -->
 	
-	<?php get_sidebar() ?>
+	<?php //get_sidebar() ?>
 	
 </div><!-- Content-section ends here -->
 

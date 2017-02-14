@@ -42,17 +42,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'del'){
             
             <div class="header-bg-section clearfix">
                 <div id="header-section" class="header-section grid-col-16 clearfix">
-                    <div id="logo-section" class="logo-section grid-col-7 grid-float-left clearfix"><?php profound_logo() ?></div>
 
 
 
 <?php
 if ( is_user_logged_in() ) {
-	echo '<div align=right>';
-	echo '<a href="';
-echo wp_logout_url( get_bloginfo('url') );
-	echo '" class="button-red">&nbsp;&nbsp; LOGOUT &nbsp;&nbsp;</a><br><br>';
-	echo '</div>';
+	
 
 
 } else {
@@ -66,6 +61,21 @@ echo wp_logout_url( get_bloginfo('url') );
 	echo '<a href="https://www.pitch.asia/register-journalist/" class="button-blue">&nbsp;&nbsp; Journalist Registration &nbsp;&nbsp;</a>';
 	echo '<br /><br /><strong>Join 20,000+ Journalists and 85,000+ Experts Building Great Stories!</strong>';
 }
+/*
+<!--
+            <div id="nav-section" class="nav-section grid-col-16 grid-float-left clearfix">
+                <div id="primarymenu-resp" class="primarymenu-resp"><span><?php _e('Menu', 'profound') ?></span><i class="mdf mdf-bars"></i></div>
+                <div id="primarymenu-section" class="primarymenu-section nav"><?php profound_nav() ?></div>
+            </div>
+			--!>
+			
+			
+			
+			
+			
+			<div id="main-section" class="main-section grid-col-16 clearfix">
+*/
+
 ?>
 
 </div>
@@ -75,9 +85,7 @@ echo wp_logout_url( get_bloginfo('url') );
                 </div><!-- header section ends -->
                 
             </div><!-- header bg section ends -->
-            <div id="nav-section" class="nav-section grid-col-16 grid-float-left clearfix">
-                <div id="primarymenu-resp" class="primarymenu-resp"><span><?php _e('Menu', 'profound') ?></span><i class="mdf mdf-bars"></i></div>
-                <div id="primarymenu-section" class="primarymenu-section nav"><?php profound_nav() ?></div>
-            </div>
+			<?php pitch_dashboard_nav() ?>
+			
                         
-            <div id="main-section" class="main-section grid-col-16 clearfix">
+            <div id="page-wrapper">

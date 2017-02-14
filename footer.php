@@ -4,9 +4,8 @@
  * 
  * @package Profound
  */
-?>
-</div>
-<?php get_sidebar('footer') ?>
+ /*
+ <?php get_sidebar('footer') ?>
 
             <div class="footer-bg-section-pink grid-col-16 clearfix">
                 <div id="footer-section" class="footer-section grid-col-16">
@@ -16,6 +15,10 @@
             </div>
         </div><!-- wrapper ends -->
     </div><!-- parent-wrapper ends -->
+ */
+?>
+</div>
+
     <?php wp_footer(); ?>
 </body>
 </html>
