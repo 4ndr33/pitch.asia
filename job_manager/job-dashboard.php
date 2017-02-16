@@ -1,6 +1,7 @@
 <div id="job-manager-job-dashboard">
 	<p><?php _e( 'Your listings are shown in the table below.', 'wp-job-manager' ); ?></p>
-	<table class="job-manager-jobs">
+	
+		<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
 				<?php foreach ( $job_dashboard_columns as $key => $column ) : ?>

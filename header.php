@@ -42,6 +42,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'del'){
             
             <div class="header-bg-section clearfix">
                 <div id="header-section" class="header-section grid-col-16 clearfix">
+				<div id="logo-section" class="logo-section grid-col-7 grid-float-left clearfix"><?php profound_logo() ?></div>
 
 
 
@@ -85,7 +86,7 @@ if ( is_user_logged_in() ) {
                 </div><!-- header section ends -->
                 
             </div><!-- header bg section ends -->
-			<?php pitch_dashboard_nav() ?>
+			<?php pitch_dashboard_nav(); ?>
 			
                         
             <div id="page-wrapper">
