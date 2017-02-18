@@ -1,5 +1,35 @@
 <?php
 
+
+define('PROFOUND_PRO', FALSE );
+
+
+
+/**
+ * Contant for URL: [themeroot]/assets/global/
+ * 
+ * @since 1.0.8.1
+ */
+define('PROFOUND_GLOBAL_URL', get_template_directory_uri() . '/assets/global/');
+
+
+
+/**
+ * Constant for Directory: [themeroot]/includes/
+ * 
+ * @since 1.0.0
+ * 
+ */
+define('PROFOUND_INCLUDES_DIR' , get_template_directory() . '/includes/' );
+
+
+
+/**
+ * Customizer call
+ */
+require_once PROFOUND_INCLUDES_DIR . 'customizer.php';
+
+
 function profound_setup() 
 {
     register_nav_menu('primary', __('Primary Menu','pitchdasboard'));
@@ -72,27 +102,28 @@ add_action( 'wp_enqueue_scripts', 'wptuts_styles_with_the_lot' );
 
 //This function below will NOT reset the user's password when they are confirmed by the "New User Approve" plugin. If we remove this function, then the user will always get a reset new password when they are approved, and we do not want that to happen
 
+
 function profound_logo() {
     
-    //$logo_img = profound_get_option('logo_img');
-	$logo_img = get_option('logo_img');
+    $logo_img = profound_get_option('logo_img');
             
-         if( empty($logo_img)): ?>
+        if( empty($logo_img)): ?>
         
         <div id="site-title" class="site-title">
                 <a href="<?php echo esc_url( home_url( '/' ) ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ) . ' | ' . esc_attr( get_bloginfo('description') ) ?>" rel="home"><?php echo esc_html(get_bloginfo( 'name', 'display' )) ?></a>
             </div>
-            <?php if(!get_option('disable_site_desc')): ?>
+            <?php if(!profound_get_option('disable_site_desc')): ?>
                 <div id="site-description" class="site-description"><?php echo esc_html( get_bloginfo( 'description' ) ) ?></div>
             <?php endif; ?>
         <?php else: ?>
         
             <div id="site-title">
-                <a href="<?php echo esc_url( home_url( '/' ) ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ) ?>" rel="home"><img src="<?php echo esc_url( get_option('logo_img') ) ?>"/></a>
+                <a href="<?php echo esc_url( home_url( '/' ) ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ) ?>" rel="home"><img src="<?php echo esc_url( profound_get_option('logo_img') ) ?>"/></a>
             </div>
 
         <?php endif;
 }
+
 function profound_get_social_section_individual_icon($option, $title, $icon) {
     $output = '';
 
@@ -194,7 +225,6 @@ if( current_user_can('expert_source') )
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="https://www.pitch.asia">Pitch.Asia</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -218,8 +248,9 @@ if( current_user_can('expert_source') )
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
+			<?php if ( is_user_logged_in() ) { ?>
+			
+			<div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
@@ -276,6 +307,59 @@ if( current_user_can('expert_source') )
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
+			
+			<?php } else { ?>
+			
+				<div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/login"><i class="fa fa-edit fa-fw"></i> Login</a>
+                        </li>
+						<li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Registration<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/register-journalist">Journalist Registration</a>
+                                </li>
+                                <li>
+                                    <a href="/register-expertsource">Expert Registration</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+						
+						<li>
+                            <a href="/contact"><i class="fa fa-table fa-fw"></i> Contact Us</a>
+                        </li>
+						<li>
+                            <a href="/about"><i class="fa fa-table fa-fw"></i> About Us</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+			
+			<?php } ?>
+			
+            
         </nav>
 		
 <?php

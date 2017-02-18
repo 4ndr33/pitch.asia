@@ -34,7 +34,7 @@
         </p>
 
         <p class="submit">
-            <input type="submit" name="wp-submit" id="wp-submit" value="<?php esc_attr_e( 'Log In' ); ?>" />
+            <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-success" value="<?php esc_attr_e( 'Log In' ); ?>" />
             <input type="hidden" name="redirect_to" value="<?php echo WPUF_Login::get_posted_value( 'redirect_to' ); ?>" />
             <input type="hidden" name="wpuf_login" value="true" />
             <input type="hidden" name="action" value="login" />

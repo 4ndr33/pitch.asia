@@ -42,7 +42,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'del'){
             
             <div class="header-bg-section clearfix">
                 <div id="header-section" class="header-section grid-col-16 clearfix">
-				<div id="logo-section" class="logo-section grid-col-7 grid-float-left clearfix"><?php profound_logo() ?></div>
+				<div id="logo-section" class="logo-section grid-col-7 grid-float-left clearfix" style="float:left;"><?php profound_logo() ?></div>
 
 
 
@@ -55,11 +55,11 @@ if ( is_user_logged_in() ) {
 
 
 
-	echo '<div align=right>';
-	echo '<a href="https://www.pitch.asia/login/" class="button-pink">&nbsp;&nbsp; LOGIN &nbsp;&nbsp;</a><br><br>';
-	echo '<a href="https://www.pitch.asia/register-expertsource/" class="button-green">&nbsp;&nbsp; Expert Source Registration &nbsp;&nbsp;</a>';
+	echo '<div align=right><br><br>';
+	echo '<a href="https://www.pitch.asia/login/" class="btn btn-danger">&nbsp;&nbsp; LOGIN &nbsp;&nbsp;</a><br><br>';
+	echo '<a href="https://www.pitch.asia/register-expertsource/" class="btn btn-success">&nbsp;&nbsp; Expert Source Registration &nbsp;&nbsp;</a>';
 	echo '&nbsp;&nbsp;&nbsp;';
-	echo '<a href="https://www.pitch.asia/register-journalist/" class="button-blue">&nbsp;&nbsp; Journalist Registration &nbsp;&nbsp;</a>';
+	echo '<a href="https://www.pitch.asia/register-journalist/" class="btn btn-primary">&nbsp;&nbsp; Journalist Registration &nbsp;&nbsp;</a>';
 	echo '<br /><br /><strong>Join 20,000+ Journalists and 85,000+ Experts Building Great Stories!</strong>';
 }
 /*
