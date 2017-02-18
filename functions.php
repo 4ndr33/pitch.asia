@@ -228,7 +228,11 @@ if( current_user_can('expert_source') )
             </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
+            
+            <!-- /.navbar-top-links -->
+			<?php if ( is_user_logged_in() ) { ?>
+			
+			<ul class="nav navbar-top-links navbar-right">
                 
                 <!-- /.dropdown -->
                 
@@ -247,9 +251,6 @@ if( current_user_can('expert_source') )
                 </li>
                 <!-- /.dropdown -->
             </ul>
-            <!-- /.navbar-top-links -->
-			<?php if ( is_user_logged_in() ) { ?>
-			
 			<div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
