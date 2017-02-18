@@ -89,4 +89,4 @@ if ( is_user_logged_in() ) {
 			<?php pitch_dashboard_nav(); ?>
 			
                         
-            <div id="page-wrapper">
+            <div id="page-wrapper" class="main-section grid-col-16 clearfix">

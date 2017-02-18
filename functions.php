@@ -1,6 +1,20 @@
 <?php
+/**
+ * Profound Theme functions and definitions
+ * 
+ * @package Profound
+ * @since 1.0
+ */
 
 
+
+/**
+ * Constant to check whether Profound Premium Active or not.
+ * 
+ * Returns True only when Premium theme is active.
+ * 
+ * @since 1.0
+ */
 define('PROFOUND_PRO', FALSE );
 
 
@@ -30,11 +44,148 @@ define('PROFOUND_INCLUDES_DIR' , get_template_directory() . '/includes/' );
 require_once PROFOUND_INCLUDES_DIR . 'customizer.php';
 
 
-function profound_setup() 
-{
-    register_nav_menu('primary', __('Primary Menu','pitchdasboard'));
+
+if( ! function_exists( 'profound_setup' ) ):
+/**
+ * Sets up theme defaults and registers support for various theme features
+ * 
+ * @since 1.0
+ */
+function profound_setup() {
+    
+    global $content_width;
+    
+    /**
+     * Primary content width according to the design and stylesheet.
+     */
+    if ( ! isset( $content_width ) ) { $content_width = 890; }
+    
+    /**
+     * Makes profound Theme ready for translation.
+     * Translations can be filed in the /languages/ directory
+     */
+    load_theme_textdomain('profound', get_template_directory() . '/languages');
+
+    /**
+     * Add default posts and comments RSS feed links to head.
+     */
+    add_theme_support('automatic-feed-links');
+    
+    /**
+     * Add custom background.
+     * @todo Put E7E7E7 in a variable and then change it according to the skin
+     */
+    add_theme_support('custom-background', array('default-color' => 'E7E7E7'));
+    
+    /**
+     * Automatically adds title tag
+     */
+    add_theme_support( "title-tag" );
+    
+    /**
+     * Adds supports for Theme menu.
+     * Profound uses wp_nav_menu() in a single location to diaplay one single menu.
+     */
+    register_nav_menu('primary', __('Primary Menu','profound'));
+
+    /**
+     * Add support for Post Thumbnails.
+     * Defines a custom name and size for Thumbnails to be used in the theme.
+     *
+     * Note: In order to use the default theme thumbnail, add_image_size() must be removed
+     * and 'profoundThumb' value must be removed from the_post_thumbnail in the loop file.
+     */
+    add_theme_support('post-thumbnails');
+    add_image_size('profoundThumb', 190, 130, true);
 }
-add_action( 'init', 'profound_setup' );
+endif;
+add_action( 'after_setup_theme', 'profound_setup' );
+
+
+/**
+ * Register sidebars one at right and three footer sidebars in a box.
+ * 
+ * @since 1.0
+ */
+function profound_sidebars() {
+
+    // Footerbox Sidebar #1
+    register_sidebar(array(
+        'name' => __('Right Sidebar', 'profound'),
+        'id' => 'right_sidebar',
+        'description' => __('Right Sidebar', 'profound'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    
+    // Footerbox Sidebar #1
+    register_sidebar(array(
+        'name' => __('Footerbox Sidebar #1', 'profound'),
+        'id' => 'footerbox_sidebar_1',
+        'description' => __('Footerbox Sidebar #1', 'profound'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    
+    // Footerbox Sidebar #2
+    register_sidebar(array(
+        'name' => __('Footerbox Sidebar #2', 'profound'),
+        'id' => 'footerbox_sidebar_2',
+        'description' => __('Footerbox Sidebar #2', 'profound'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    
+    // Footerbox Sidebar #3
+    register_sidebar(array(
+        'name' => __('Footerbox Sidebar #3', 'profound'),
+        'id' => 'footerbox_sidebar_3',
+        'description' => __('Footerbox Sidebar #3', 'profound'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>',
+    ));
+    
+}
+add_action( 'widgets_init', 'profound_sidebars' );
+
+
+/**
+ * Returns Theme Fonts based on $method
+ * 
+ * @param string $method 'enqueue'|'customizer'
+ * @internal 'enqueue' for enqueueing fonts | 'customizer' for customizer options
+ * @return array
+ */
+function profound_get_fonts($method){
+    $fonts = unserialize('a:12:{i:0;a:6:{s:4:"name";s:34:"Arial, Helvetica, "Helvetica Neue"";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:5:"arial";s:11:"displayname";s:5:"Arial";}i:1;a:6:{s:4:"name";s:21:""Arial Black", Gadget";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:11:"arial-black";s:11:"displayname";s:11:"Arial Black";}i:2;a:6:{s:4:"name";s:22:""Courier New", Courier";s:6:"family";s:9:"monospace";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:11:"courier-new";s:11:"displayname";s:11:"Courier New";}i:3;a:6:{s:4:"name";s:38:"Georgia, "Palatino Linotype", Palatino";s:6:"family";s:5:"serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:7:"georgia";s:11:"displayname";s:7:"Georgia";}i:4;a:6:{s:4:"name";s:4:"Lato";s:6:"family";s:10:"sans-serif";s:7:"variant";s:70:"100,100italic,300,300italic,regular,italic,700,700italic,900,900italic";s:4:"type";s:15:"google-webfonts";s:9:"shortname";s:4:"lato";s:11:"displayname";s:4:"Lato";}i:5;a:6:{s:4:"name";s:38:""Lucida Sans Unicode", "Lucida Grande"";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:6:"lucida";s:11:"displayname";s:13:"Lucida Grande";}i:6;a:6:{s:4:"name";s:9:"Open Sans";s:6:"family";s:10:"sans-serif";s:7:"variant";s:70:"300,300italic,regular,italic,600,600italic,700,700italic,800,800italic";s:4:"type";s:15:"google-webfonts";s:9:"shortname";s:8:"opensans";s:11:"displayname";s:9:"Open Sans";}i:7;a:6:{s:4:"name";s:29:""Palatino Linotype", Palatino";s:6:"family";s:5:"serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:8:"palatino";s:11:"displayname";s:8:"Palatino";}i:8;a:6:{s:4:"name";s:14:"Tahoma, Geneva";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:6:"tahoma";s:11:"displayname";s:6:"Tahoma";}i:9;a:6:{s:4:"name";s:24:""Times New Roman", Times";s:6:"family";s:5:"serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:5:"times";s:11:"displayname";s:15:"Times New Roman";}i:10;a:6:{s:4:"name";s:25:""Trebuchet MS", Helvetica";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:12:"trebuchet-ms";s:11:"displayname";s:12:"Trebuchet MS";}i:11;a:6:{s:4:"name";s:15:"Verdana, Geneva";s:6:"family";s:10:"sans-serif";s:7:"variant";b:0;s:4:"type";s:4:"open";s:9:"shortname";s:7:"verdana";s:11:"displayname";s:7:"Verdana";}}');
+    
+    switch ($method):
+        case 'enqueue':
+            return $fonts;
+            break;
+
+        case 'customizer':
+            $customizer_array = array();
+            foreach($fonts as $font):
+                $customizer_array[$font['shortname']] = $font['displayname'];
+            endforeach;
+            
+            return $customizer_array;
+            break;
+
+        default;
+            return $fonts;
+
+    endswitch;
+}
 
 function wptuts_styles_with_the_lot()
 {
@@ -244,7 +395,7 @@ if( current_user_can('expert_source') )
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo wp_logout_url( get_bloginfo('url') ); ?> "><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -254,17 +405,8 @@ if( current_user_can('expert_source') )
 			<div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                        <?php if ( is_user_logged_in() ) { get_search_form(); } ?>
+                        
                         <li>
                             <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
