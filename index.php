@@ -83,37 +83,44 @@
 $args = array('post_type' => 'media_query','posts_per_page'=>'5','order'=>'DESC','orderby' => 'date','offset'=>'0');
 //Define the loop based on arguments
 $loop = new WP_Query( $args );
-if( $loop->have_posts() ) :
-//Display the contents
-while ( $loop->have_posts() ) : $loop->the_post(); ?>
-<!-- BEGIN IF WE HAVE MEDIA QUERIES THEN ADD MEDIA QUERIES HERE -->
-<div class="rg-container">
+if( $loop->have_posts() ) :  
+//Display the contents                        
+                        ?>
+
+    <div class="rg-container">
 	<!--<div class="rg-header">
 		<div class="rg-hed">Latest Media Queries</div>
 		<div class="rg-subhed">Are you an expert in any of the topics below?</div>
 	</div>-->
 	<div class="rg-content">
-		<table class="rg-table zebra">
+		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<th class="text rg-th">Subject</th>
 				<th class="text rg-th">Details</th>
 				<th class="text rg-th">Deadline</th>
 			</thead>
 			<tbody>
+<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+<!-- BEGIN IF WE HAVE MEDIA QUERIES THEN ADD MEDIA QUERIES HERE -->
+
 				<tr>
 						<td class="text subject" data-title="Subject"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></td>
 						<td class="text details" data-title="Details"><?php the_excerpt(); ?><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">More &gt;&gt;</a></td>
 						<td class="text" data-title="Deadline"><?php  if((get_post_meta( $post->ID, 'deadline', true ))) { ?>
 <font color=red><?php echo get_post_meta( $post->ID, 'deadline', true ); ?></font><?php } ?></td>
 				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+			
 <!-- END IF WE HAVE MEDIA QUERIES THEN ADD MEDIA QUERIES HERE -->
 
 
-        <?php endwhile; else: ?>
+        <?php endwhile; ?>
+    
+    </tbody>
+		</table>
+	</div>
+</div>
+    
+    <?php else: ?>
 <!-- START SHOW IF NO MEDIA QUERIES --><div class="wpuf-message"><div align="center"><img src="https://www.pitch.asia/wp-content/uploads/exclamation-octagon-icon.png" border="0"> <strong>No Media Queries From Journalists Match Your Profile</strong><br /><br /><img src="https://www.pitch.asia/wp-content/uploads/red-loading.gif" border="0" title="No Media Queries Found"><br /><br />Make sure your profile is complete so we can match you to journalists' media queries.<br /><br /><a href="https://www.pitch.asia/profile/" class="button-white">Update Profile</a></div></div>
 <br /><!-- END SHOW IF NO MEDIA QUERIES -->
 <?php endif; ?>

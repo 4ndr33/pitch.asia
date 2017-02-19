@@ -6,7 +6,7 @@
  */
 ?>
 
-<div id="sidebar-right-section" class="sidebar-right-section grid-float-left" style="float:right;">
+<div id="sidebar-right-section" class="sidebar-right-section grid-float-left">
 
 
 <?php //This code will display the skyscraper banner only to LOGGED OUT users

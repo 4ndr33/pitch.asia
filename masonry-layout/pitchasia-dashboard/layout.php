@@ -26,7 +26,7 @@
         
 		<?php if ($layoutSettings['show_title'] == 'yes'): ?>
             <div class="wmle_post_title">
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><br /><?php the_time('Y-m-d g:i:s'); ?> (+8 GMT)<br /><?php the_author(); ?>
+                <a href="<?php the_permalink(); ?>"><?php //the_title(); ?></a><br /><?php //the_time('Y-m-d g:i:s'); ?> (+8 GMT)<br /><?php the_author(); ?>
             </div>
         <?php endif; ?>
         

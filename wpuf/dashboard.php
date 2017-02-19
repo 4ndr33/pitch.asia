@@ -14,7 +14,7 @@
     $charging_enabled = wpuf_get_option( 'charge_posting', 'wpuf_payment' );
     ?>
 <img src="https://www.pitch.asia/wp-content/uploads/mymediaqueries-banner.png" border="0">
-    <table class="wpuf-table <?php echo $post_type; ?>" cellpadding="0" cellspacing="0">
+    <table class="table table-striped table-bordered table-hover" cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <?php

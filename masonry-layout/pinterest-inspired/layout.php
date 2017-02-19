@@ -36,7 +36,7 @@
         <?php if ($layoutSettings['show_title'] == 'yes'): ?>
             <div class="wmle_post_title">
                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                <!--<a href="<?php// comments_link(); ?>" class="commentLink"><span class="icon-bubble icons"></span>&nbsp;<?php comments_number('0', '1', '%' ); ?></a>-->
+                <!--<a href="<?php// comments_link(); ?>" class="commentLink"><span class="icon-bubble icons"></span>&nbsp;<?php //comments_number('0', '1', '%' ); ?></a>-->
 <?php the_time('Y-m-d g:i:s'); ?> (+8 GMT)
             </div>
         <?php endif; ?>

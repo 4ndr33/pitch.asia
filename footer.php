@@ -6,7 +6,7 @@
  */
 ?>
 
-<?php get_sidebar('footer') ?>
+<?php //get_sidebar('footer') ?>
 
             <?php if(!profound_get_option('disable_footer')): ?>
             <div class="footer-bg-section-pink grid-col-16 clearfix">

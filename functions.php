@@ -310,6 +310,26 @@ function profound_social_section_show() {
 <?php
     endif;
 }
+
+/**
+ * Displays the navigation links for the archive pages. Is only
+ * applicable if the total number of pages is more than 'one'.
+ * 
+ * @since 1.0
+ */
+function profound_archive_nav() {
+    
+    global $wp_query;
+
+    if ($wp_query->max_num_pages > 1 && !profound_get_option('disable_blog_nav')): ?>
+        
+        <div class="archive-nav grid-col-16">
+            <div class="nav-next"><?php previous_posts_link('<span class="meta-nav">&larr;</span> ' . __('Newer posts', 'profound')); ?></div>
+            <div class="nav-previous"><?php next_posts_link(__('Older posts', 'profound') . ' <span class="meta-nav">&rarr;</span>'); ?></div>
+        </div>
+        
+<?php endif;
+}
 function profound_nav() {
     /*
 	wp_nav_menu(array(
@@ -345,8 +365,156 @@ function profound_nav_fallback()
 <?php
 }
 
+function pitch_dashboard_nav3() 
+{
+    
+    $navMenu=wp_nav_menu(array(
+        'theme_location' => 'primary',
+        'container_id' => 'pitch_dashboard_menu',
+        'container_class' => 'sidebar-nav navbar-collapse',
+        'menu_class' => 'nav',
+        'menu_id' => 'side-menu',
+        'echo' => false,
+        'link_before' => '<i class="fa fa-files-o fa-fw"></i> ',
+        'fallback_cb' => 'pitch_dashboard_nav2' // Fallback function in case no menu item is defined.
+    ));
+    $navMenu=str_replace('sub-menu', 'nav nav-second-level', $navMenu);
+    echo $navMenu;
+    /**/
+    /*
+    echo str_replace('sub-menu', 'nav nav-second-level', wp_nav_menu(array(
+        'theme_location' => 'primary',
+        'container_id' => 'pitch_dashboard_menu',
+        'container_class' => 'sidebar-nav navbar-collapse',
+        'menu_class' => 'nav',
+        'menu_id' => 'side-menu',
+        'fallback_cb' => 'pitch_dashboard_nav2' // Fallback function in case no menu item is defined.
+    ))
+);
+    */
+    
+}
 
 function pitch_dashboard_nav() {
+/*
+<div id="menu">
+    	<ul class="sf-menu" id="profound_menu">
+			<?php
+            	wp_list_pages( 'title_li=&sort_column=menu_order&depth=3');
+            ?>
+        </ul>
+    </div>
+	*/
+$tempMediaQuery="Submit Media Queries";	
+if( current_user_can('expert_source') ) 
+{  
+	$tempMediaQuery="Media Queries";	
+} 
+
+
+
+?>
+	
+    
+	
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- /.navbar-header -->
+
+            
+            <!-- /.navbar-top-links -->
+			<?php if ( is_user_logged_in() ) { ?>
+			
+			<ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+                
+                <!-- /.dropdown -->
+                
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="<?php echo wp_logout_url( get_bloginfo('url') ); ?> "><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+			<div class="navbar-default sidebar" role="navigation">
+                <?php pitch_dashboard_nav3(); ?>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+			
+			<?php } else { ?>
+			
+				<div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/login"><i class="fa fa-edit fa-fw"></i> Login</a>
+                        </li>
+						<li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Registration<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/register-journalist">Journalist Registration</a>
+                                </li>
+                                <li>
+                                    <a href="/register-expertsource">Expert Registration</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+						
+						<li>
+                            <a href="/contact"><i class="fa fa-table fa-fw"></i> Contact Us</a>
+                        </li>
+						<li>
+                            <a href="/about"><i class="fa fa-table fa-fw"></i> About Us</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+			
+			<?php } ?>
+			
+            
+        </nav>
+		
+<?php
+}
+
+function pitch_dashboard_nav2() {
 /*
 <div id="menu">
     	<ul class="sf-menu" id="profound_menu">
